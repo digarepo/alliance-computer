@@ -49,7 +49,7 @@ jobs:
           remote_path: /home/${{ secrets.CPANEL_USER }}/alliancecomputer.co
           port: 22
           sftp_only: true
-          delete_remote_files: true
+          delete_remote_files: false
 
       # 6️⃣ SSH: install deps ONCE + restart Passenger
       - name: Install deps & restart Passenger
