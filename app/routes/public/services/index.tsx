@@ -45,7 +45,7 @@ export default function ServicesPage(): React.JSX.Element {
           {/* Image Column */}
           <div className="w-full lg:w-[60%] relative h-75 md:h-125 lg:h-150">
             <img
-              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=2000"
+              src="https://guidelinegeo.com/wp-content/uploads/2025/08/PowerAdapter1_web-1536x866-1.png"
               alt="Geophysical survey instrumentation"
               className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700"
             />

@@ -113,7 +113,7 @@ export default function ITInfrastructurePage(): React.JSX.Element {
               <img
                 src={cat.image}
                 alt={cat.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 transition-all grayscale-[0.4] group-hover:grayscale-0"
+                className="absolute inset-0 w-full h-full object-cover duration-1000 group-hover:scale-105 transition-all grayscale-[0.4] group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-700" />
             </div>
