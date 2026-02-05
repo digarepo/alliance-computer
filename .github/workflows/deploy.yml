@@ -64,6 +64,14 @@ jobs:
             set -e
             cd /home/${{ secrets.CPANEL_USER }}/alliancecomputer.co
 
+            source /home/${{ secrets.CPANEL_USER }}/nodevenv/alliancecomputer.co/20/bin/activate 2>/dev/null || true
+            export PATH=/home/${{ secrets.CPANEL_USER }}/nodevenv/alliancecomputer.co/20/bin:$PATH
+
+            # fallback: try system node
+            which node || true
+            node -v || true
+            npm -v || true
+
             if [ ! -d node_modules ]; then
               echo "📦 Installing production dependencies (first time only)"
               npm ci --omit=dev
