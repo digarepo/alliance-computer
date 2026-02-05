@@ -29,7 +29,6 @@ import { cn } from '@/lib/utils';
  */
 const navItems = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
   {
     name: 'Services',
     href: '/services',
@@ -39,6 +38,7 @@ const navItems = [
     ],
   },
   { name: 'Contact', href: '/contact' },
+  { name: 'About', href: '/about' },
 ];
 
 /**
@@ -92,7 +92,7 @@ export function Navbar(): React.JSX.Element {
                         {item.name}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-64 gap-2 p-4 bg-card">
+                        <ul className="grid w-64 gap-2">
                           {item.subItems.map((sub) => (
                             <li key={sub.href}>
                               <NavigationMenuLink asChild>
