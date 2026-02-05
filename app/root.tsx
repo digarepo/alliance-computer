@@ -32,8 +32,60 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+
+        <meta
+          name="description"
+          content="Alliance Computer supplies geophysical exploration equipment and enterprise IT infrastructure including servers, networking, and datacenter hardware."
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="application-name" content="Alliance Computer" />
+        <link rel="canonical" href="https://alliancecomputer.co/" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://alliancecomputer.co/" />
+        <meta property="og:title" content="Alliance Computer" />
+        <meta property="og:site_name" content="Alliance Computer" />
+        <meta
+          property="og:description"
+          content="Geophysical and IT Infrastructure Equipment Supplier"
+        />
+        <meta
+          property="og:image"
+          content="https://alliancecomputer.co/web-app-manifest-512x512.png"
+        />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Alliance Computer" />
+        <meta
+          name="twitter:description"
+          content="Geophysical and IT Infrastructure Equipment Supplier"
+        />
+        <meta
+          name="twitter:image"
+          content="https://alliancecomputer.co/web-app-manifest-512x512.png"
+        />
+
+        <meta
+          name="theme-color"
+          content="#2563eb"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#0f172a"
+          media="(prefers-color-scheme: dark)"
+        />
+
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
         <Links />
       </head>
+
       <body>
         <ThemeProvider>
           {children}
