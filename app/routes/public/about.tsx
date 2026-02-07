@@ -49,7 +49,7 @@ export default function AboutPage(): React.JSX.Element {
             </div>
             <div className="flex-1 pb-4">
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-                Alliance Computer is a specialized supplier of enterprise-grade
+                <code>Alliance</code>  is a specialized supplier of enterprise-grade
                 technology, focused on the intersection of geophysical
                 exploration and digital infrastructure.
               </p>
@@ -140,9 +140,9 @@ export default function AboutPage(): React.JSX.Element {
               Built for a <br /> connected future.
             </h2>
             <p className="text-white/60 text-lg leading-relaxed">
-              Alliance Computer continues to expand its reach, ensuring that
-              cutting-edge hardware is accessible to every project, regardless
-              of geographical complexity.
+              <code>Alliance</code> continues to expand its reach,
+              ensuring that cutting-edge hardware is accessible to every
+              project, regardless of geographical complexity.
             </p>
           </div>
         </div>

@@ -10,7 +10,10 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Cpu, ShieldCheck, Globe } from 'lucide-react';
 import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
-import { LogoCarousel } from '@/components/public/logo-carousel';
+import {
+  ClientCarousel,
+  LogoCarousel,
+} from '@/components/public/logo-carousel';
 import { FeatureGrid } from '@/components/public/feature-grid';
 import { BottomCTA } from '@/components/public/bottom-cta';
 
@@ -197,6 +200,8 @@ export default function Home() {
       {/* 2. TECHNICAL ADVANTAGE FEATURE GRID (Geo-priority inside) */}
       <FeatureGrid />
 
+      <ClientCarousel />
+
       {/* 3. ARCHITECTURAL VISUAL BREAK (Dark Tint for Visibility) */}
       <section className="h-[50vh] md:h-[60vh] relative overflow-hidden flex items-center justify-center bg-slate-950">
         <img
@@ -259,13 +264,13 @@ export default function Home() {
               </div>
 
               <div className="lg:col-span-7 relative group">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[3rem] shadow-2xl border">
+                <div className="relative aspect-16/10 overflow-hidden rounded-[3rem] shadow-2xl border">
                   <img
                     src={SECTORS[0].imageUrl}
                     alt="Geophysical equipment link"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 to-transparent" />
                 </div>
                 {/* Decorative Technical Badge */}
                 <div className="absolute -bottom-6 -right-6 bg-primary p-6 rounded-3xl shadow-xl hidden md:block">
@@ -310,13 +315,13 @@ export default function Home() {
               </div>
 
               <div className="lg:col-span-7 relative group lg:direction-ltr">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[3rem] shadow-2xl border">
+                <div className="relative aspect-16/10 overflow-hidden rounded-[3rem] shadow-2xl border">
                   <img
                     src={SECTORS[1].imageUrl}
                     alt="IT infrastructure link"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 to-transparent" />
                 </div>
                 {/* Decorative Technical Badge */}
                 <div className="absolute -bottom-6 -left-6 bg-slate-950 p-6 rounded-3xl shadow-xl hidden md:block border border-white/10">
@@ -338,9 +343,9 @@ export default function Home() {
             Ready to equip <br className="md:hidden" /> your next milestone?
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-            Alliance Computer facilitates specialized hardware logistics across
-            the region, ensuring your projects are supported by the most
-            reliable technology available today.
+            Alliance facilitates specialized hardware logistics across the
+            region, ensuring your projects are supported by the most reliable
+            technology available today.
           </p>
         </div>
       </section>

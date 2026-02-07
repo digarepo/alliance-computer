@@ -96,9 +96,28 @@ export function Footer(): React.JSX.Element {
 
         {/* Bottom Bar */}
         <div className="mt-16 border-t pt-8 sm:mt-20 lg:mt-24">
-          <p className="text-xs leading-5 text-muted-foreground">
-            &copy; {currentYear} Alliance. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-xs leading-5 text-muted-foreground">
+              &copy; {currentYear} Alliance. All rights reserved.
+            </p>
+
+            <div className="flex items-center gap-2 text-xs leading-5 text-muted-foreground">
+              <span>Site by</span>
+              <a
+                href="https://digatech.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-medium group"
+              >
+                <img
+                  src="https://digatech.co/Diga.png"
+                  alt="Diga Technologies"
+                  className="dark:invert h-3.5 w-auto transition-transform group-hover:scale-110"
+                />
+                <span>Technologies</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

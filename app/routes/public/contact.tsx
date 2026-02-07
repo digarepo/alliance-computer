@@ -219,7 +219,7 @@ export default function ContactPage(): React.JSX.Element {
             Operational Footprint
           </p>
           <h3 className="text-2xl font-bold tracking-tighter">
-            Expanding to Enterprise Clients Globally.
+            Expanding to Enterprise Clients All Over Ethiopia.
           </h3>
         </div>
       </section>
