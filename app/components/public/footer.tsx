@@ -24,7 +24,7 @@ export function Footer(): React.JSX.Element {
             </Link>
             <p className="text-sm leading-6 text-muted-foreground max-w-xs">
               Providing cutting-edge IT infrastructure and advanced geo-physical
-              equipment solutions for a transforming world.
+              equipment solutions for a transforming Ethiopia.
             </p>
           </div>
 
