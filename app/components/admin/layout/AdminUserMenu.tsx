@@ -18,9 +18,7 @@ import { LogOut, User, MoreVertical, ShieldCheck } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 type AdminUserMenuProps = {
-  /** The user's display name */
   name: string;
-  /** Array of roles assigned to the user */
   roleLabel?: string[];
 };
 
