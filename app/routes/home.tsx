@@ -1,15 +1,15 @@
 /**
  * @file app/routes/public/home.tsx
  * @description Masterpiece Home Page for Alliance Computer.
- * Sequential layout: Hero -> Features -> Visual Break -> Sector Links -> Carousel -> Global -> CTA.
+ * Integrates dynamic Hero Slider data from MariaDB with hardcoded fallbacks.
  */
 
 import * as React from 'react';
+import { useLoaderData, Link } from 'react-router';
 import type { Route } from './+types/home';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Cpu, ShieldCheck, Globe } from 'lucide-react';
-import { Link } from 'react-router';
-import { cn } from '@/lib/utils';
 import {
   ClientCarousel,
   LogoCarousel,
@@ -17,18 +17,19 @@ import {
 import { FeatureGrid } from '@/components/public/feature-grid';
 import { BottomCTA } from '@/components/public/bottom-cta';
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'Alliance | Geo-Physical & IT Infrastructure' },
-    {
-      name: 'description',
-      content:
-        'Specialized geo-physical surveying equipment and enterprise IT solutions.',
-    },
-  ];
-}
-
-const SECTORS = [
+/**
+ * Fallback data used if the database is empty or content is unpublished.
+ */
+type SectorType = {
+  id?: string;
+  category: string;
+  title: string;
+  emphasis: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+};
+const FALLBACK_SECTORS: SectorType[] = [
   {
     category: 'Geo-Physical Equipments',
     title: 'Precision Instruments for',
@@ -51,25 +52,65 @@ const SECTORS = [
   },
 ];
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: 'Alliance | Geo-Physical & IT Infrastructure' },
+    {
+      name: 'description',
+      content:
+        'Specialized geo-physical surveying equipment and enterprise IT solutions.',
+    },
+  ];
+}
+
+/**
+ * Server Loader: Fetches dynamic hero content from MariaDB.
+ */
+export async function loader() {
+  try {
+    const { getHeroData } =
+      await import('@/modules/CMS/hero/hero.model.server');
+
+    // Pass 'true' to ensure we ONLY get published slides
+    const dbHeroes = await getHeroData(true);
+
+    return { dbHeroes };
+  } catch (error) {
+    console.error('Failed to load hero data:', error);
+    // Return empty array so the component triggers the FALLBACK_SECTORS
+    return { dbHeroes: [] };
+  }
+}
+
 export default function Home() {
+  const { dbHeroes } = useLoaderData<typeof loader>();
+
+  /**
+   * Merge logic: Use DB records if they exist, otherwise fallback.
+   */
+  const displaySectors = dbHeroes.length > 0 ? dbHeroes : FALLBACK_SECTORS;
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
+  // Auto-slide effect
   React.useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
+      setCurrentIndex((prev) =>
+        prev === displaySectors.length - 1 ? 0 : prev + 1,
+      );
     }, 8000);
     return () => clearInterval(timer);
-  }, []);
+  }, [displaySectors.length]);
 
   return (
     <main className="flex flex-col min-h-screen">
       {/* 1. HERO SLIDER SECTION */}
       <section className="relative h-[72vh] w-full overflow-hidden bg-slate-950">
-        {SECTORS.map((sector, index) => {
+        {displaySectors.map((sector, index) => {
           const isActive = index === currentIndex;
           return (
             <div
-              key={sector.category}
+              key={sector.id || `fallback-${index}`}
               className={cn(
                 'absolute inset-0 h-full w-full',
                 isActive ? 'z-10' : 'z-0',
@@ -89,7 +130,7 @@ export default function Home() {
               </div>
 
               {/* High-Contrast Overlay for Text Readability */}
-              <div className="absolute inset-0 bg-slate-950/60 lg:bg-linear-to-r lg:from-slate-950 lg:via-slate-950/40 lg:to-transparent" />
+              <div className="absolute inset-0 bg-slate-700/60 lg:bg-linear-to-r lg:from-slate-700 lg:via-slate-950/40 lg:to-transparent" />
 
               <div className="relative h-full container max-w-7xl mx-auto px-6 lg:px-8 flex items-center">
                 <div className="max-w-3xl">
@@ -168,7 +209,7 @@ export default function Home() {
 
         {/* Slide Navigation Bars */}
         <div className="absolute bottom-12 right-6 lg:right-12 z-20 flex flex-col gap-4">
-          {SECTORS.map((_, index) => (
+          {displaySectors.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
@@ -197,19 +238,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. TECHNICAL ADVANTAGE FEATURE GRID (Geo-priority inside) */}
+      {/* 2. TECHNICAL ADVANTAGE FEATURE GRID */}
       <FeatureGrid />
 
       <ClientCarousel />
 
-      {/* 3. ARCHITECTURAL VISUAL BREAK (Dark Tint for Visibility) */}
+      {/* 3. ARCHITECTURAL VISUAL BREAK */}
       <section className="h-[50vh] md:h-[60vh] relative overflow-hidden flex items-center justify-center bg-slate-950">
         <img
           src="https://i.dell.com/is/image/DellContent/content/dam/ss2/page-specific/franchise-page/server-franchise/bulkshoot-datacenter-02-0173-la9450t-poweredge-xe9680-1499x700.png?fmt=png-alpha&wid=1499&hei=700"
           alt="High-density data center corridor"
           className="absolute inset-0 w-full h-full object-cover grayscale opacity-30"
         />
-        {/* Darkening Gradient to solve the white-on-white text issue */}
         <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-slate-950" />
 
         <div className="relative text-center z-10 px-6">
@@ -225,17 +265,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. DIRECT SECTOR LINKS (Redesigned Architectural Layout) */}
+      {/* 4. DIRECT SECTOR LINKS */}
       <section className="py-24 md:py-40 bg-background overflow-hidden">
         <div className="container max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col gap-32 md:gap-48">
-            {/* Sector 01: Geo-Physical (Right-Aligned Image, Left-Aligned Text) */}
+            {/* Sector 01: Geo-Physical */}
             <div className="relative grid grid-cols-1 lg:grid-cols-12 items-center gap-8">
-              {/* Massive Background Number */}
               <span className="absolute -top-20 -left-10 text-[15rem] font-bold text-muted/20 select-none z-0">
                 01
               </span>
-
               <div className="lg:col-span-5 z-10 space-y-6 lg:-mr-24">
                 <nav className="flex items-center gap-2 text-primary font-bold tracking-[0.4em] text-[10px] uppercase">
                   <span className="h-px w-8 bg-primary" />
@@ -251,7 +289,7 @@ export default function Home() {
                 </p>
                 <Button
                   asChild
-                  className="rounded-full px-10 transition-all duration-500 font-bold group shadow-xl"
+                  className="rounded-full px-10 font-bold group shadow-xl"
                 >
                   <Link
                     to="/services/geophysical"
@@ -262,30 +300,25 @@ export default function Home() {
                   </Link>
                 </Button>
               </div>
-
               <div className="lg:col-span-7 relative group">
                 <div className="relative aspect-16/10 overflow-hidden rounded-[3rem] shadow-2xl border">
                   <img
-                    src={SECTORS[0].imageUrl}
-                    alt="Geophysical equipment link"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+                    src={FALLBACK_SECTORS[0].imageUrl}
+                    alt="Geophysical equipment"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 to-transparent" />
                 </div>
-                {/* Decorative Technical Badge */}
                 <div className="absolute -bottom-6 -right-6 bg-primary p-6 rounded-3xl shadow-xl hidden md:block">
                   <ShieldCheck className="h-8 w-8 text-white" />
                 </div>
               </div>
             </div>
 
-            {/* Sector 02: IT Infrastructure (Left-Aligned Image, Right-Aligned Text) */}
+            {/* Sector 02: IT Infrastructure */}
             <div className="relative grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:direction-rtl">
-              {/* Massive Background Number */}
               <span className="absolute -top-20 -right-10 text-[15rem] font-bold text-muted/20 select-none z-0">
                 02
               </span>
-
               <div className="lg:col-span-5 z-10 space-y-6 lg:-ml-24 text-left lg:text-right flex flex-col lg:items-end">
                 <nav className="flex items-center gap-2 text-primary font-bold tracking-[0.4em] text-[10px] uppercase">
                   <span className="h-px w-8 bg-primary" />
@@ -302,7 +335,7 @@ export default function Home() {
                 <Button
                   asChild
                   size={'lg'}
-                  className="rounded-full px-10  transition-all duration-500 font-bold group shadow-xl"
+                  className="rounded-full px-10 font-bold group shadow-xl"
                 >
                   <Link
                     to="/services/it-infrastructure"
@@ -313,17 +346,14 @@ export default function Home() {
                   </Link>
                 </Button>
               </div>
-
               <div className="lg:col-span-7 relative group lg:direction-ltr">
                 <div className="relative aspect-16/10 overflow-hidden rounded-[3rem] shadow-2xl border">
                   <img
-                    src={SECTORS[1].imageUrl}
-                    alt="IT infrastructure link"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+                    src={FALLBACK_SECTORS[1].imageUrl}
+                    alt="IT infrastructure"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 to-transparent" />
                 </div>
-                {/* Decorative Technical Badge */}
                 <div className="absolute -bottom-6 -left-6 bg-slate-950 p-6 rounded-3xl shadow-xl hidden md:block border border-white/10">
                   <Cpu className="h-8 w-8 text-primary" />
                 </div>
@@ -332,10 +362,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* 5. INFINITE LOGO CAROUSEL */}
+
       <LogoCarousel />
 
-      {/* 6. GLOBAL FOOTPRINT TEXT SECTION */}
       <section className="py-24 border-t bg-muted/10">
         <div className="container max-w-5xl mx-auto px-6 text-center">
           <Globe className="h-10 w-10 text-primary mx-auto mb-8 opacity-70" />
@@ -350,7 +379,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. REUSABLE BOTTOM CTA */}
       <BottomCTA />
     </main>
   );
