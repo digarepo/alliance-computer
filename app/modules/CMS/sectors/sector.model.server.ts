@@ -2,7 +2,6 @@ import { query } from "@/lib/db.server";
 import crypto from "crypto";
 
 export async function getSectorBySlug(slug: string) {
-  // JOIN with the statuses table to get the human-readable name (status_label)
   const sectors = await query<any>(`
     SELECT
       sd.*,
@@ -67,7 +66,6 @@ export async function updateSector(slug: string, data: any, sections: any[]) {
     );
   }
 
-  // Handle nested sections
   await query(`DELETE FROM sector_sections WHERE sector_id = ?`, [sectorId]);
 
   for (const [index, sec] of sections.entries()) {
