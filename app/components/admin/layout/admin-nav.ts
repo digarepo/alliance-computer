@@ -52,23 +52,23 @@ export const adminNavGroups: AdminNavGroup[] = [
         href: "/admin/sectors",
         icon: Layers,
       },
-      {
-        label: "Project Portfolio",
-        href: "/admin/portfolio",
-        icon: Briefcase,
-      },
+    //   {
+    //     label: "Project Portfolio",
+    //     href: "/admin/portfolio",
+    //     icon: Briefcase,
+    //   },
     ],
   },
-  {
-    label: "Communications",
-    items: [
-      {
-        label: "Inquiries",
-        href: "/admin/contacts",
-        icon: Mail,
-      },
-    ],
-  },
+//   {
+//     label: "Communications",
+//     items: [
+//       {
+//         label: "Inquiries",
+//         href: "/admin/contacts",
+//         icon: Mail,
+//       },
+//     ],
+//   },
   {
     label: "Administration",
     items: [
