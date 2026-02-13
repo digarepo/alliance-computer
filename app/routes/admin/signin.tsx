@@ -26,31 +26,50 @@ import {
  * Uses the imports to validate user and establish session.
  */
 export async function action({ request }: { request: Request }) {
-  const formData = await request.formData();
-  const email = String(formData.get('email') || '').trim();
-  const password = String(formData.get('password') || '');
+  try {
+    const formData = await request.formData();
+    const email = String(formData.get('email') || '').trim();
+    const password = String(formData.get('password') || '');
 
-  if (!email || !password) {
-    return { error: 'Invalid email or password', values: { email } };
+    if (!email || !password) {
+      return { error: 'Invalid email or password', values: { email } };
+    }
+
+    const user = await authenticateUser(email, password);
+    if (!user) {
+      return { error: 'Invalid credentials', values: { email } };
+    }
+
+    const permissions = await getUserPermissions(user.id);
+
+    return createUserSession(
+      {
+        id: user.id,
+        email: user.email,
+        full_name: user.full_name,
+        permissions,
+        roles: user.roles,
+      },
+      '/admin',
+    );
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    console.error('SIGNIN_ERROR:', errorMessage);
+
+    return new Response(
+      JSON.stringify({
+        debug: errorMessage,
+        stack: errorStack,
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
   }
-
-  const user = await authenticateUser(email, password);
-  if (!user) {
-    return { error: 'Invalid credentials', values: { email } };
-  }
-
-  const permissions = await getUserPermissions(user.id);
-
-  return createUserSession(
-    {
-      id: user.id,
-      email: user.email,
-      full_name: user.full_name,
-      permissions,
-      roles: user.roles,
-    },
-    '/admin',
-  );
 }
 
 export default function Signin() {
