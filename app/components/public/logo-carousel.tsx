@@ -72,6 +72,9 @@ export function LogoCarousel() {
             >
               <img
                 src={partner.logo}
+                loading="lazy"
+                width={64}
+                height={64}
                 alt={partner.name}
                 className="h-10 md:h-12 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 object-contain"
               />

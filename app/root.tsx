@@ -13,16 +13,7 @@ import { ThemeProvider } from './components/ui/theme-provider';
 import { Toaster } from 'sonner';
 
 export const links: Route.LinksFunction = () => [
-  // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  // {
-  //   rel: 'preconnect',
-  //   href: 'https://fonts.gstatic.com',
-  //   crossOrigin: 'anonymous',
-  // },
-  // {
-  //   rel: 'stylesheet',
-  //   href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
-  // },
+  // Preload fonts
   {
     rel: 'preload',
     href: '/fonts/inter-400.woff2',
@@ -30,15 +21,12 @@ export const links: Route.LinksFunction = () => [
     type: 'font/woff2',
     crossOrigin: 'anonymous',
   },
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
+    rel: 'preload',
+    href: '/fonts/inter-700.woff2',
+    as: 'font',
+    type: 'font/woff2',
     crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
   },
 
   // Preload hero images
@@ -46,16 +34,22 @@ export const links: Route.LinksFunction = () => [
     rel: 'preload',
     as: 'image',
     href: '/images/herogeo.webp',
+    imagesrcset: '/images/herogeo.webp 1920w',
+    type: 'image/webp',
   },
   {
     rel: 'preload',
     as: 'image',
     href: '/images/heroit.webp',
+    imagesrcset: '/images/heroit.webp 1920w',
+    type: 'image/webp',
   },
   {
     rel: 'preload',
     as: 'image',
     href: '/images/architecture.webp',
+    imagesrcset: '/images/architecture.webp 1920w',
+    type: 'image/webp',
   },
 ];
 

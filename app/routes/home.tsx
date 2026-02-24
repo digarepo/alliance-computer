@@ -245,6 +245,7 @@ export default function Home() {
       <section className="h-[50vh] md:h-[60vh] relative overflow-hidden flex items-center justify-center bg-slate-950">
         <img
           src="/images/architecture.webp"
+          loading="lazy"
           alt="High-density data center corridor"
           className="absolute inset-0 w-full h-full object-cover grayscale opacity-30"
         />
