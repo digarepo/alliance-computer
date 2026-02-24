@@ -69,6 +69,8 @@ export function SectorHero({
             <div className="aspect-4/3 overflow-hidden rounded-2xl border bg-muted shadow-2xl">
               <img
                 src={imageUrl}
+                width={1200}
+                height={800}
                 fetchPriority="high"
                 loading="eager"
                 alt={title}

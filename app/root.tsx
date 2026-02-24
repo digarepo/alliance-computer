@@ -30,6 +30,33 @@ export const links: Route.LinksFunction = () => [
     type: 'font/woff2',
     crossOrigin: 'anonymous',
   },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+  },
+
+  // Preload hero images
+  {
+    rel: 'preload',
+    as: 'image',
+    href: 'https://guidelinegeo.com/wp-content/uploads/2025/08/Active-Guidance-image.png',
+  },
+  {
+    rel: 'preload',
+    as: 'image',
+    href: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2500&auto=format&fit=crop',
+  },
+  {
+    rel: 'preload',
+    as: 'image',
+    href: 'https://i.dell.com/is/image/DellContent/content/dam/ss2/page-specific/franchise-page/server-franchise/bulkshoot-datacenter-02-0173-la9450t-poweredge-xe9680-1499x700.png?fmt=png-alpha&wid=1499&hei=700',
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
