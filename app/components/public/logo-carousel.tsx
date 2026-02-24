@@ -48,7 +48,7 @@ const PARTNERS = [
 const CLIENTS = [
   { name: 'EEU', logo: '/images/eeu.png' },
   { name: 'ewti', logo: '/images/ewti.png' },
-  { name: 'edf', logo: '/images/edf.png' },
+  { name: 'edf', logo: '/images/edf.webp' },
   { name: 'efp', logo: '/images/efp.png' },
 ];
 

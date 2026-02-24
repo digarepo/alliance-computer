@@ -13,15 +13,22 @@ import { ThemeProvider } from './components/ui/theme-provider';
 import { Toaster } from 'sonner';
 
 export const links: Route.LinksFunction = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  // {
+  //   rel: 'preconnect',
+  //   href: 'https://fonts.gstatic.com',
+  //   crossOrigin: 'anonymous',
+  // },
+  // {
+  //   rel: 'stylesheet',
+  //   href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+  // },
   {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
+    rel: 'preload',
+    href: '/fonts/inter-400.woff2',
+    as: 'font',
+    type: 'font/woff2',
     crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
   },
 ];
 
@@ -40,6 +47,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="robots" content="index, follow" />
         <meta name="application-name" content="Alliance Computer" />
         <link rel="canonical" href="https://alliancecomputer.co/" />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alliancecomputer.co/" />
