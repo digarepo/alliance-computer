@@ -36,8 +36,7 @@ const FALLBACK_SECTORS: SectorType[] = [
     emphasis: 'Subsurface Exploration',
     description:
       'Industry-leading magnetic and electromagnetic surveying tools. Engineered for reliability in the most challenging field conditions.',
-    imageUrl:
-      'https://guidelinegeo.com/wp-content/uploads/2025/08/Active-Guidance-image.png',
+    imageUrl: '/images/herogeo.webp',
     link: '/services/geophysical',
   },
   {
@@ -46,8 +45,7 @@ const FALLBACK_SECTORS: SectorType[] = [
     emphasis: 'Network Infrastructure',
     description:
       'Enterprise-grade networking and secure infrastructure. We build the backbone that powers modern business connectivity.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2500&auto=format&fit=crop',
+    imageUrl: '/images/heroit.webp',
     link: '/services/it-infrastructure',
   },
 ];
@@ -246,7 +244,7 @@ export default function Home() {
       {/* 3. ARCHITECTURAL VISUAL BREAK */}
       <section className="h-[50vh] md:h-[60vh] relative overflow-hidden flex items-center justify-center bg-slate-950">
         <img
-          src="https://i.dell.com/is/image/DellContent/content/dam/ss2/page-specific/franchise-page/server-franchise/bulkshoot-datacenter-02-0173-la9450t-poweredge-xe9680-1499x700.png?fmt=png-alpha&wid=1499&hei=700"
+          src="/images/architecture.webp"
           alt="High-density data center corridor"
           className="absolute inset-0 w-full h-full object-cover grayscale opacity-30"
         />

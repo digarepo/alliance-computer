@@ -45,17 +45,17 @@ export const links: Route.LinksFunction = () => [
   {
     rel: 'preload',
     as: 'image',
-    href: 'https://guidelinegeo.com/wp-content/uploads/2025/08/Active-Guidance-image.png',
+    href: '/images/herogeo.webp',
   },
   {
     rel: 'preload',
     as: 'image',
-    href: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2500&auto=format&fit=crop',
+    href: '/images/heroit.webp',
   },
   {
     rel: 'preload',
     as: 'image',
-    href: 'https://i.dell.com/is/image/DellContent/content/dam/ss2/page-specific/franchise-page/server-franchise/bulkshoot-datacenter-02-0173-la9450t-poweredge-xe9680-1499x700.png?fmt=png-alpha&wid=1499&hei=700',
+    href: '/images/architecture.webp',
   },
 ];
 
